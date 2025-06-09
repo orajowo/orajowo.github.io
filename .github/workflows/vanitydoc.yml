@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - config.json
+      - vanitydoc.json
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         run: go install code.pfad.fr/vanitydoc@latest
 
       - name: Generate HTML site
-        run: vanitydoc config.json
+        run: vanitydoc vanitydoc.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
