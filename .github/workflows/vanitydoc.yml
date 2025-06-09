@@ -22,10 +22,7 @@ jobs:
         run: go install code.pfad.fr/vanitydoc@latest
 
       - name: Generate HTML site
-        run: |
-          mkdir out
-          vanitydoc config.json
-          mv *.html out/
+        run: vanitydoc config.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
