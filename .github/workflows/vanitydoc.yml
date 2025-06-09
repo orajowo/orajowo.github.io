@@ -2,15 +2,18 @@ name: Generate Vanitydoc Site
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
-      - vanitydoc.json
+      - config.json
+      - '.github/workflows/vanitydoc.yml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Go
@@ -21,8 +24,8 @@ jobs:
       - name: Install vanitydoc
         run: go install code.pfad.fr/vanitydoc@latest
 
-      - name: Generate HTML site
-        run: vanitydoc vanitydoc.json
+      - name: Generate documentation site
+        run: vanitydoc config.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
