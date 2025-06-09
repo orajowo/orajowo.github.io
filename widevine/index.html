@@ -1,0 +1,598 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="vcs" content="git"/>
+<meta name="vcs:default-branch" content="main"/>
+<meta name="vcs:clone" content="https://github.com/orajowo/widevine.git"/>
+<meta name="vcs:clone" content="git@github.com:orajowo/widevine.git"/>
+<meta name="forge:summary" content="https://github.com/orajowo/widevine"/>
+<meta name="forge:dir" content="https://github.com/orajowo/widevine/blob/{ref}/{path}"/>
+<meta name="forge:file" content="https://github.com/orajowo/widevine/blob/{ref}/{path}"/>
+<meta name="forge:rawfile" content="https://github.com/orajowo/widevine/raw/{ref}/{path}"/>
+<meta name="forge:line" content="https://github.com/orajowo/widevine/blob/{ref}/{path}#L{line}"/>
+<meta name="go-import" content="github.com/orajowo/widevine git https://github.com/orajowo/widevine.git"/>
+<meta name="go-source" content="github.com/orajowo/widevine https://github.com/orajowo/widevine https://github.com/orajowo/widevine/blob/{commit}/{file} https://github.com/orajowo/widevine/blob/{commit}/{file}#L{line}"/>
+<link href="/vanitydoc.css" rel="stylesheet">
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+        <title>widevine package - github.com/orajowo/widevine</title>
+    </head>
+    <body>
+        <div class="module-nav sticky-header">
+          <div>
+            <a href="#top" title="Back to top"
+              >github.com/orajowo/widevine <span>↑</span></a
+            >
+          </div>
+          <nav><a
+                href="#pkg-index"
+                >Index</a
+              >
+            <span>|</span>&nbsp;<a
+                href="#pkg-files"
+                >Files</a
+              >
+            <span>|</span>&nbsp;<a
+                href="#pkg-forge"
+                >Forge</a
+              >
+            </nav>
+        </div>
+      
+  <h1 id="pkg-overview">widevine package</h1>
+
+    <p><code>import "github.com/orajowo/widevine"</code></p>
+    
+    
+  
+
+
+    <h2 id="pkg-index">Index <a href="#pkg-index" class="permalink">¶</a></h2>
+
+      <ul>
+        
+        
+        
+          <li><a href="#PsshBox">func PsshBox(pssh []byte) ([]byte, error)</a></li>
+        
+        
+          <li>
+            <a href="#Cdm">type Cdm</a>
+            
+              <ul>
+                
+                
+                  <li>
+                    <a href="#Cdm.Block"
+                      >func (c *Cdm) Block(body ResponseBody) (cipher.Block, error)</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#Cdm.New"
+                      >func (c *Cdm) New(private_key, client_id, pssh1 []byte) error</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#Cdm.RequestBody"
+                      >func (c *Cdm) RequestBody() ([]byte, error)</a
+                    >
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#Key">type Key</a>
+            
+          </li>
+        
+          <li>
+            <a href="#KeyContainer">type KeyContainer</a>
+            
+              <ul>
+                
+                
+                  <li>
+                    <a href="#KeyContainer.Id"
+                      >func (k KeyContainer) Id() []byte</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#KeyContainer.Key"
+                      >func (k KeyContainer) Key(block cipher.Block) []byte</a
+                    >
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#Pssh">type Pssh</a>
+            
+              <ul>
+                
+                
+                  <li>
+                    <a href="#Pssh.Marshal"
+                      >func (p *Pssh) Marshal() []byte</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#Pssh.Unmarshal"
+                      >func (p *Pssh) Unmarshal(data []byte) error</a
+                    >
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#ResponseBody">type ResponseBody</a>
+            
+              <ul>
+                
+                
+                  <li>
+                    <a href="#ResponseBody.Container"
+                      >func (r ResponseBody) Container() iter.Seq[KeyContainer]</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#ResponseBody.Unmarshal"
+                      >func (r *ResponseBody) Unmarshal(data []byte) error</a
+                    >
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#Session">type Session</a>
+            
+              <ul>
+                
+                  <li><a href="#Open">func Open(privateKey, clientID, pssh, licenseResponse []byte) (*Session, error)</a></li>
+                
+                
+                  <li>
+                    <a href="#Session.Close"
+                      >func (s *Session) Close()</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#Session.Keys"
+                      >func (s *Session) Keys() []Key</a
+                    >
+                  </li>
+                
+                  <li>
+                    <a href="#Session.RequestBody"
+                      >func (s *Session) RequestBody() ([]byte, error)</a
+                    >
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+      </ul>
+    
+
+    
+
+    
+
+    
+      <h2 id="PsshBox" data-kind="function">
+        func
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/psshbox.go#L10" rel="noopener nofollow" title="View Source">PsshBox</a>
+
+        <a href="#PsshBox" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/psshbox.go#L10" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>func PsshBox(pssh []<a href="https://pkg.go.dev/builtin#byte">byte</a>) ([]<a href="https://pkg.go.dev/builtin#byte">byte</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</pre>
+      </div>
+      <p>PsshBox parses a Widevine PSSH box and returns its payload (protobuf data).
+
+      
+  
+
+    
+
+    
+      <h2 id="Cdm" data-kind="type">
+        type
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L51" rel="noopener nofollow" title="View Source">Cdm</a>
+
+        <a href="#Cdm" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L51" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>type Cdm struct {<span class="comment">/* contains filtered or unexported fields */</span>}</pre>
+      </div>
+      
+      
+      
+      
+  
+
+      
+      
+        <h3 id="Cdm.Block" data-kind="method">
+          func (*Cdm)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L18" rel="noopener nofollow" title="View Source">Block</a>
+
+          <a href="#Cdm.Block" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L18" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (c *<a href="#Cdm">Cdm</a>) Block(body <a href="#ResponseBody">ResponseBody</a>) (<a href="https://pkg.go.dev/crypto/cipher">cipher</a>.<a href="https://pkg.go.dev/crypto/cipher#Block">Block</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="Cdm.New" data-kind="method">
+          func (*Cdm)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L56" rel="noopener nofollow" title="View Source">New</a>
+
+          <a href="#Cdm.New" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L56" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (c *<a href="#Cdm">Cdm</a>) New(private_key, client_id, pssh1 []<a href="https://pkg.go.dev/builtin#byte">byte</a>) <a href="https://pkg.go.dev/builtin#error">error</a></pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="Cdm.RequestBody" data-kind="method">
+          func (*Cdm)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L173" rel="noopener nofollow" title="View Source">RequestBody</a>
+
+          <a href="#Cdm.RequestBody" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L173" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (c *<a href="#Cdm">Cdm</a>) RequestBody() ([]<a href="https://pkg.go.dev/builtin#byte">byte</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</pre>
+        </div>
+        
+        
+  
+
+      
+    
+      <h2 id="Key" data-kind="type">
+        type
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L13" rel="noopener nofollow" title="View Source">Key</a>
+
+        <a href="#Key" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L13" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>type Key struct {
+	ID  []<a href="https://pkg.go.dev/builtin#byte">byte</a>
+	IV  []<a href="https://pkg.go.dev/builtin#byte">byte</a>
+	Key []<a href="https://pkg.go.dev/builtin#byte">byte</a>
+}</pre>
+      </div>
+      
+      
+      
+      
+  
+
+      
+      
+    
+      <h2 id="KeyContainer" data-kind="type">
+        type
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L79" rel="noopener nofollow" title="View Source">KeyContainer</a>
+
+        <a href="#KeyContainer" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L79" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>type KeyContainer [1]<a href="/orajowo/protobuf">protobuf</a>.<a href="/orajowo/protobuf#Message">Message</a></pre>
+      </div>
+      
+      
+      
+      
+  
+
+      
+      
+        <h3 id="KeyContainer.Id" data-kind="method">
+          func (KeyContainer)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L134" rel="noopener nofollow" title="View Source">Id</a>
+
+          <a href="#KeyContainer.Id" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L134" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (k <a href="#KeyContainer">KeyContainer</a>) Id() []<a href="https://pkg.go.dev/builtin#byte">byte</a></pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="KeyContainer.Key" data-kind="method">
+          func (KeyContainer)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L81" rel="noopener nofollow" title="View Source">Key</a>
+
+          <a href="#KeyContainer.Key" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L81" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (k <a href="#KeyContainer">KeyContainer</a>) Key(block <a href="https://pkg.go.dev/crypto/cipher">cipher</a>.<a href="https://pkg.go.dev/crypto/cipher#Block">Block</a>) []<a href="https://pkg.go.dev/builtin#byte">byte</a></pre>
+        </div>
+        
+        
+  
+
+      
+    
+      <h2 id="Pssh" data-kind="type">
+        type
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L89" rel="noopener nofollow" title="View Source">Pssh</a>
+
+        <a href="#Pssh" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L89" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>type Pssh struct {
+	ContentId []<a href="https://pkg.go.dev/builtin#byte">byte</a>
+	KeyIds    [][]<a href="https://pkg.go.dev/builtin#byte">byte</a>
+}</pre>
+      </div>
+      
+      
+      
+      
+  
+
+      
+      
+        <h3 id="Pssh.Marshal" data-kind="method">
+          func (*Pssh)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L94" rel="noopener nofollow" title="View Source">Marshal</a>
+
+          <a href="#Pssh.Marshal" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L94" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (p *<a href="#Pssh">Pssh</a>) Marshal() []<a href="https://pkg.go.dev/builtin#byte">byte</a></pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="Pssh.Unmarshal" data-kind="method">
+          func (*Pssh)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L105" rel="noopener nofollow" title="View Source">Unmarshal</a>
+
+          <a href="#Pssh.Unmarshal" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L105" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (p *<a href="#Pssh">Pssh</a>) Unmarshal(data []<a href="https://pkg.go.dev/builtin#byte">byte</a>) <a href="https://pkg.go.dev/builtin#error">error</a></pre>
+        </div>
+        
+        
+  
+
+      
+    
+      <h2 id="ResponseBody" data-kind="type">
+        type
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L132" rel="noopener nofollow" title="View Source">ResponseBody</a>
+
+        <a href="#ResponseBody" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L132" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>type ResponseBody [1]<a href="/orajowo/protobuf">protobuf</a>.<a href="/orajowo/protobuf#Message">Message</a></pre>
+      </div>
+      <p>SignedMessage
+LICENSE = 2;
+
+      
+      
+      
+  
+
+      
+      
+        <h3 id="ResponseBody.Container" data-kind="method">
+          func (ResponseBody)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L155" rel="noopener nofollow" title="View Source">Container</a>
+
+          <a href="#ResponseBody.Container" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L155" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (r <a href="#ResponseBody">ResponseBody</a>) Container() <a href="https://pkg.go.dev/iter">iter</a>.<a href="https://pkg.go.dev/iter#Seq">Seq</a>[<a href="#KeyContainer">KeyContainer</a>]</pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="ResponseBody.Unmarshal" data-kind="method">
+          func (*ResponseBody)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L126" rel="noopener nofollow" title="View Source">Unmarshal</a>
+
+          <a href="#ResponseBody.Unmarshal" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go#L126" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (r *<a href="#ResponseBody">ResponseBody</a>) Unmarshal(data []<a href="https://pkg.go.dev/builtin#byte">byte</a>) <a href="https://pkg.go.dev/builtin#error">error</a></pre>
+        </div>
+        
+        
+  
+
+      
+    
+      <h2 id="Session" data-kind="type">
+        type
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L7" rel="noopener nofollow" title="View Source">Session</a>
+
+        <a href="#Session" class="permalink">¶</a>
+      </h2>
+      <div class="corner-forge-link">
+        <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L7" rel="noopener nofollow" title="View Source">❖</a>
+
+        <pre>type Session struct {<span class="comment">/* contains filtered or unexported fields */</span>}</pre>
+      </div>
+      
+      
+      
+      
+  
+
+      
+        <h3 id="Open" data-kind="function">
+          func
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L19" rel="noopener nofollow" title="View Source">Open</a>
+
+          <a href="#Open" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L19" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func Open(privateKey, clientID, pssh, licenseResponse []<a href="https://pkg.go.dev/builtin#byte">byte</a>) (*<a href="#Session">Session</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</pre>
+        </div>
+        
+        
+  
+
+      
+      
+        <h3 id="Session.Close" data-kind="method">
+          func (*Session)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L60" rel="noopener nofollow" title="View Source">Close</a>
+
+          <a href="#Session.Close" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L60" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (s *<a href="#Session">Session</a>) Close()</pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="Session.Keys" data-kind="method">
+          func (*Session)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L56" rel="noopener nofollow" title="View Source">Keys</a>
+
+          <a href="#Session.Keys" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L56" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (s *<a href="#Session">Session</a>) Keys() []<a href="#Key">Key</a></pre>
+        </div>
+        
+        
+  
+
+      
+        <h3 id="Session.RequestBody" data-kind="method">
+          func (*Session)
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L52" rel="noopener nofollow" title="View Source">RequestBody</a>
+
+          <a href="#Session.RequestBody" class="permalink">¶</a>
+        </h3>
+        <div class="corner-forge-link">
+          <a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go#L52" rel="noopener nofollow" title="View Source">❖</a>
+
+          <pre>func (s *<a href="#Session">Session</a>) RequestBody() ([]<a href="https://pkg.go.dev/builtin#byte">byte</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</pre>
+        </div>
+        
+        
+  
+
+      
+    
+
+    
+
+    
+      <h2 id="pkg-files">
+        Source Files
+        <a href="#pkg-files" class="permalink">¶</a>
+      </h2>
+      <p><a href="https://github.com/orajowo/widevine/blob/v0.0.2/psshbox.go" rel="noopener nofollow" title="View Source">psshbox.go</a>
+<a href="https://github.com/orajowo/widevine/blob/v0.0.2/sessions.go" rel="noopener nofollow" title="View Source">sessions.go</a>
+<a href="https://github.com/orajowo/widevine/blob/v0.0.2/widevine.go" rel="noopener nofollow" title="View Source">widevine.go</a>
+</p>
+    
+  
+
+  
+
+  
+      <h2 id="pkg-forge">
+        Forge <a class="permalink" href="#pkg-forge">&para;</a>
+      </h2>
+        <p><a href="https://github.com/orajowo/widevine" rel="noopener nofollow">https://github.com/orajowo/widevine</a></p>
+
+      
+        <code>git clone</code>
+        <pre>https://github.com/orajowo/widevine.git
+git@github.com:orajowo/widevine.git
+</pre
+        >
+        <div class="module-nav footer">
+          <div>
+            <span>github.com/orajowo/widevine</span>
+          </div>
+          <code>v0.0.2</code>
+        </div>
+        <footer>
+          <nav>
+            Generated with
+            <a href="https://code.pfad.fr/vanitydoc/">vanitydoc v0.21.1</a> &middot;
+            <a href="https://go.dev">Go Language</a>
+          </nav>
+        </footer>
+    </body>
+  </html>
